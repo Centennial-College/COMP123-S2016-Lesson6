@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace PlayerProject
 {
@@ -17,7 +14,7 @@ namespace PlayerProject
         private string _name;
 
         private int _speed;
-        private float _direction; // angle in degrees
+        private double _direction; // angle in degrees
         private Vector2 _position; // postion in 2d space
         private Vector2 _facing; // where the game object is looking at in 2d space
 
@@ -100,7 +97,7 @@ namespace PlayerProject
             }
         }
 
-        public float Direction
+        public double Direction
         {
             get
             {
@@ -140,9 +137,9 @@ namespace PlayerProject
             this.Defense = 0;
             this.Lives = 0;
             this.Speed = 0;
-            this.Direction = 0f;
             this.Position = new Vector2();
             this.Facing = new Vector2();
+            this.Direction = this._calculateTargetAngle();
         }
 
         /**
@@ -150,18 +147,26 @@ namespace PlayerProject
          * This utility method calculates the direction between two vectors
          * </summary>
          */
-         private double _calculateTargetAngle()
+        private double _calculateTargetAngle()
         {
             float dx = this.Position.X - this.Facing.X;
             float dy = this.Position.Y - this.Facing.Y;
+            dy = -dy;
 
             double radians = Math.Atan2(dy, dx);
-            double targetAngle = radians * 180 / Math.PI;
+            double targetAngle = radians * 180 / Math.PI; // angle in degrees
+            targetAngle += 180;
 
             return targetAngle;
         }
 
         // PUBLIC METHODS ++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+        public override string ToString()
+        {
+            return string.Format("Attack: {0}\nDefense: {1}\nName: {2}\nLives: {3}\nSpeed: {4}\nPosition.x: {5}\nPosition.y: {6}\nFacing.x: {7}\nFacing.y: {8}\nDirection: {9}",
+                this.Attack, this.Defense, this.Name, this.Lives, this.Speed, this.Position.X, this.Position.Y, this.Facing.X, this.Facing.Y, this.Direction);
+        }
+
         public void MoveRight()
         {
             Console.WriteLine("{0} is moving right.", this.Name);

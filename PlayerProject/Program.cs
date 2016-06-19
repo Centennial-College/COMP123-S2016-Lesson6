@@ -20,6 +20,14 @@ namespace PlayerProject
         {
             Player greenPlayer = new Player("green");
             greenPlayer.MoveForward();
+            Console.WriteLine();
+
+            greenPlayer.Facing.X = -3;
+            greenPlayer.Facing.Y = 3;
+
+            Console.WriteLine(greenPlayer);
+
+            Console.WriteLine();
 
             TouchingEnemy redEnemy = new TouchingEnemy("red");
             redEnemy.MoveForward();
