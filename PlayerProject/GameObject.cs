@@ -145,6 +145,22 @@ namespace PlayerProject
             this.Facing = new Vector2();
         }
 
+        /**
+         * <summary>
+         * This utility method calculates the direction between two vectors
+         * </summary>
+         */
+         private double _calculateTargetAngle()
+        {
+            float dx = this.Position.X - this.Facing.X;
+            float dy = this.Position.Y - this.Facing.Y;
+
+            double radians = Math.Atan2(dy, dx);
+            double targetAngle = radians * 180 / Math.PI;
+
+            return targetAngle;
+        }
+
         // PUBLIC METHODS ++++++++++++++++++++++++++++++++++++++++++++++++++++++++
         public void MoveRight()
         {
